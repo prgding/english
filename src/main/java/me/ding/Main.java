@@ -36,12 +36,8 @@ public class Main {
 		while (true) {
 			// 创建一个随机数生成器
 			Random random = new Random();
-
 			// 创建一个Scanner对象，读取用户输入
 			Scanner scanner = new Scanner(System.in);
-
-			ArrayList<String> strings = new ArrayList<>();
-
 			// 生成一个随机数，获取对应的key和value
 			String key = getRandomUnaskedKey(myMap, askedMap, random);
 			String value = myMap.get(key);
@@ -52,19 +48,20 @@ public class Main {
 
 			// 读取用户输入
 			String input = scanner.nextLine();
+
 			// 如果用户输入"exit"，则退出程序
 			if (input.equals("exit")) {
 				scanner.close();
-				System.exit(0);
+				break;
 			}
-			count++;
 
-			// 判断用户输入是否正确
-			if (input.equals(value)) {
-				System.out.println("对了!");
-			} else {
-				System.out.println("错了,正确答案是: " + value + "请重新输入");
+			while (!input.equals(value)) {
+				System.out.println("不对，请重新输入: " + key + " [" + count + "]");
+				input = scanner.nextLine();
 			}
+
+			System.out.println("对了!");
+			count++;
 		}
 	}
 
